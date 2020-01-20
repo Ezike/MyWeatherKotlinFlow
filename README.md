@@ -1,6 +1,8 @@
 # MyWeather
 App shows real-time weather updates for your location and any custom location you set.
-Was previously in Java but now in Kotlin and uses coroutines[Apixu Api](https://www.apixu.com/api.aspx)
+Was initially written in Java but is now in Kotlin and uses coroutines. Data is from [Apixu Api](https://www.apixu.com/api.aspx)
+ 
+* You can clone the project and fix stuff or maybe write some tests 😉☺️
 
 <h4 align="center">
 <img src="https://res.cloudinary.com/diixxqjcx/image/upload/v1554216525/Nexus_5x-Screenshot1.png" vspace="4" align= "center" width=255 ></h4>
