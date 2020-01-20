@@ -7,24 +7,14 @@ Was previously in Java but now in Kotlin and uses coroutines[Apixu Api](https://
 
 
 ## Features
+* kotlin coroutines for async operations
+* kotlin flow for data streaming
 * Local persistence using Room database
 * MVVM architecture
-* Material design
 * Databinding for binding data to views
 * Navigation component
 * Homescreen Widget that shows weather information
 * Dependency injection with Dagger 2
-* kotlin coroutines for async operations
-* kotlin flow for data streaming
-
-### Installing
-Follow these steps if you want to get a local copy of the project.
-
-## Prerequisites
-*   Android Studio IDE 3.0+
-*   Android SDK v28+
-*   Android Build Tools v28.0.3+
-*   Gradle 4.10.1+
 
 #### 1. Clone or fork the repository (Master Branch) by running the command below
 on your git terminal
