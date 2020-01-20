@@ -1,10 +1,9 @@
 # MyWeather
 App shows real-time weather updates for your location and any custom location you set.
-Weather forecast data is gotten from [Apixu Api](https://www.apixu.com/api.aspx)
+Was previously in Java but now in Kotlin and uses coroutines[Apixu Api](https://www.apixu.com/api.aspx)
 
-## Final project for Udacity Nanodegree
 <h4 align="center">
-<img src="https://res.cloudinary.com/diixxqjcx/image/upload/v1554216525/Nexus_5x-Screenshot1.png" vspace="5" align= "center" width=275 ></h4>
+<img src="https://res.cloudinary.com/diixxqjcx/image/upload/v1554216525/Nexus_5x-Screenshot1.png" vspace="4" align= "center" width=255 ></h4>
 
 
 ## Features
