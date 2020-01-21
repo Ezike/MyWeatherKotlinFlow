@@ -9,7 +9,6 @@ import ezike.tobenna.myweather.data.model.WeatherResponse
 import ezike.tobenna.myweather.data.remote.RemoteSource
 import ezike.tobenna.myweather.provider.LocationProvider
 import ezike.tobenna.myweather.widget.WeatherWidgetProvider
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -20,21 +19,22 @@ class WeatherRepository @Inject constructor(
         private val remoteSource: RemoteSource,
         private val localDataSource: LocalDataSource,
         private val locationProvider: LocationProvider,
-        private val sharedPreferences: SharedPreferences,
+        private val prefEditor: SharedPreferences.Editor,
         private val context: Context
 ) : Repository {
 
     @ExperimentalCoroutinesApi
     override fun fetchWeather(): Flow<Resource<WeatherResponse>> {
-        return flow {
+        return flow<Resource<WeatherResponse>> {
             val currentData: WeatherResponse = localDataSource.getWeather().first()
             emit(Resource.Loading(currentData))
             fetchWeatherAndCache()
+            updateWidgetData(currentData)
             emitAll(localDataSource.getWeather().map { Resource.Success(it) })
-        }.catch {
+        }.catch { cause ->
             val previousData: WeatherResponse = localDataSource.getWeather().first()
-            emit(Resource.Error(it, previousData))
-            it.printStackTrace()
+            emit(Resource.Error(cause, previousData))
+            cause.printStackTrace()
         }.flowOn(dispatcher.io)
     }
 
@@ -47,16 +47,16 @@ class WeatherRepository @Inject constructor(
         val weather: WeatherResponse = remoteSource
                 .fetchWeather(locationProvider.preferredLocationString)
         localDataSource.save(weather)
-        updateWidgetData(weather)
     }
 
-    private fun saveToPreferences(weather: WeatherResponse) {
-        val editor = sharedPreferences.edit()
-        if (weather.current.weatherDescriptions.isNotEmpty()) {
-            editor.putString(WIDGET_TEXT, weather.current.weatherDescriptions[0])
-            editor.putString(WIDGET_LOCATION, weather.weatherLocation.region)
-            editor.putString(WIDGET_ICON, weather.current.weatherDescriptions[0])
-            editor.apply()
+    private fun saveToPreferences(weather: WeatherResponse?) {
+        weather?.let {
+            if (it.current.weatherDescriptions.isNotEmpty()) {
+                prefEditor.putString(WIDGET_TEXT, weather.current.weatherDescriptions.first())
+                prefEditor.putString(WIDGET_LOCATION, weather.weatherLocation.region)
+                prefEditor.putString(WIDGET_ICON, weather.current.weatherDescriptions.first())
+                prefEditor.apply()
+            }
         }
     }
 

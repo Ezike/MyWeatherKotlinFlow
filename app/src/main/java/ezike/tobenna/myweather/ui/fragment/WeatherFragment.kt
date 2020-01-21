@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider.Factory
@@ -52,17 +51,13 @@ class WeatherFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.swipeRefresh.setOnRefreshListener(this)
-        binding.swipeRefresh.setColorSchemeColors(
-                ContextCompat.getColor(requireContext(), R.color.colorPrimary),
-                ContextCompat.getColor(requireContext(), R.color.colorAccent),
-                ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
-
         setActionBarTitle()
     }
 
     private fun setActionBarTitle() {
         weatherViewmodel.weatherLiveData.observe(this) {
-            actionBar?.toolbarTitle = it.data?.weatherLocation?.name
+            actionBar?.toolbarTitle = "${it.data?.weatherLocation?.name}, " +
+                    "${it.data?.weatherLocation?.country}"
         }
     }
 

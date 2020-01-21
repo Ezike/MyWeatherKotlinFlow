@@ -36,8 +36,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    internal fun providePrefs(context: Context): SharedPreferences {
-        return context.getSharedPreferences(WIDGET_PREF, Context.MODE_PRIVATE)
+    internal fun providePrefs(context: Context): SharedPreferences.Editor {
+        return context.getSharedPreferences(WIDGET_PREF, Context.MODE_PRIVATE).edit()
     }
 
     private const val WIDGET_PREF = "ezike.tobenna.myweather.ui.widget.pref"

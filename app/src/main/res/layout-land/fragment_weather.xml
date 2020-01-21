@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen_16"
                     android:layout_marginTop="@dimen/dimen_16"
-                    android:text="@{String.valueOf(viewModel.weatherLiveData.S.data.current.temperature).concat(@string/tempC)}"
+                    android:text="@{String.valueOf(viewModel.weatherLiveData.data.current.temperature).concat(@string/tempC)}"
                     android:textSize="@dimen/text_60"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/weather_icon"

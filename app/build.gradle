@@ -30,7 +30,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField 'String', "ApiKey", "\"f2612a4e6f3f36d656944b5cb785c59a\""
+            buildConfigField 'String', "ApiKey", "\"e5235257b00adf728e360a7521c9e096\""
             buildConfigField 'String', "BaseUrl", "\"http://api.weatherstack.com/\""
 //            resValue 'string', "api_key", "c1b490e5810e7515ef5bdcf47f8497ad"
         }
